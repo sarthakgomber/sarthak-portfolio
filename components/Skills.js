@@ -21,9 +21,9 @@ const GROUPS = [
       { name: 'React.js',     level: 88, icon: `${CDN}/react/react-original.svg` },
       { name: 'Next.js',      level: 85, icon: `${CDN}/nextjs/nextjs-original.svg` },
       { name: 'Node.js',      level: 80, icon: `${CDN}/nodejs/nodejs-original.svg` },
-      { name: 'Express.js',   level: 78, icon: `${CDN}/express/express-original.svg`, invert: true },
       { name: 'Tailwind CSS', level: 90, icon: `${CDN}/tailwindcss/tailwindcss-original.svg` },
       { name: 'React Native', level: 70, icon: `${CDN}/react/react-original.svg` },
+      { name: 'Express.js',   level: 78, icon: `${CDN}/express/express-original.svg`, invert: true },
     ],
   },
   {
