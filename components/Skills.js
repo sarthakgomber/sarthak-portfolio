@@ -21,7 +21,7 @@ const GROUPS = [
       { name: 'React.js',     level: 88, icon: `${CDN}/react/react-original.svg` },
       { name: 'Next.js',      level: 85, icon: `${CDN}/nextjs/nextjs-original.svg` },
       { name: 'Node.js',      level: 80, icon: `${CDN}/nodejs/nodejs-original.svg` },
-      { name: 'Express.js',   level: 78, icon: `${CDN}/express/express-original.svg` },
+      { name: 'Express.js',   level: 78, icon: `${CDN}/express/express-original.svg`, invert: true },
       { name: 'Tailwind CSS', level: 90, icon: `${CDN}/tailwindcss/tailwindcss-original.svg` },
       { name: 'React Native', level: 70, icon: `${CDN}/react/react-original.svg` },
     ],
@@ -31,18 +31,10 @@ const GROUPS = [
     skills: [
       { name: 'MongoDB',      level: 78, icon: `${CDN}/mongodb/mongodb-original.svg` },
       { name: 'Git',          level: 85, icon: `${CDN}/git/git-original.svg` },
-      { name: 'GitHub',       level: 85, icon: `${CDN}/github/github-original.svg` },
+      { name: 'GitHub',       level: 85, icon: `${CDN}/github/github-original.svg`, invert: true },
       { name: 'Postman',      level: 75, icon: `${CDN}/postman/postman-original.svg` },
       { name: 'VS Code',      level: 88, icon: `${CDN}/vscode/vscode-original.svg` },
       { name: 'Android Studio', level: 70, icon: `${CDN}/androidstudio/androidstudio-original.svg` },
-    ],
-  },
-  {
-    category: 'Problem Solving',
-    skills: [
-      { name: 'Data Structures', level: 72, icon: `${CDN}/cplusplus/cplusplus-plain.svg` },
-      { name: 'Algorithms',      level: 70, icon: `${CDN}/python/python-original.svg` },
-      { name: 'LeetCode',        level: 75, icon: `${CDN}/javascript/javascript-plain.svg` },
     ],
   },
 ]
@@ -53,7 +45,7 @@ const SOFT = [
   'Learning Agility','Reliability',
 ]
 
-function SkillRow({ name, level, icon, animate }) {
+function SkillRow({ name, level, icon, animate, invert }) {
   return (
     <div style={{ marginBottom: '1rem' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
@@ -74,8 +66,10 @@ function SkillRow({ name, level, icon, animate }) {
               height={20}
               style={{
                 objectFit: 'contain',
-                filter: 'brightness(0.85) saturate(0.7)',
-                opacity: 0.85,
+                filter: invert
+                  ? 'brightness(10) saturate(0) opacity(0.75)'
+                  : 'brightness(0.9) saturate(0.75)',
+                opacity: 0.88,
               }}
               onError={e => { e.target.style.display = 'none' }}
             />
@@ -144,7 +138,7 @@ export default function Skills() {
                 {g.category}
               </p>
               {g.skills.map(s => (
-                <SkillRow key={s.name} name={s.name} level={s.level} icon={s.icon} animate={animate} />
+                <SkillRow key={s.name} name={s.name} level={s.level} icon={s.icon} animate={animate} invert={s.invert} />
               ))}
             </div>
           ))}
