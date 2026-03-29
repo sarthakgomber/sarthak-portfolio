@@ -2,39 +2,47 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+// Devicon CDN base — svg icons pulled directly, no npm needed
+const CDN = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
+
 const GROUPS = [
   {
     category: 'Languages',
     skills: [
-      { name: 'JavaScript', level: 90 },
-      { name: 'C++',        level: 80 },
-      { name: 'HTML / CSS', level: 92 },
+      { name: 'JavaScript', level: 90, icon: `${CDN}/javascript/javascript-original.svg` },
+      { name: 'C++',        level: 80, icon: `${CDN}/cplusplus/cplusplus-original.svg` },
+      { name: 'HTML5',      level: 92, icon: `${CDN}/html5/html5-original.svg` },
+      { name: 'CSS3',       level: 90, icon: `${CDN}/css3/css3-original.svg` },
     ],
   },
   {
-    category: 'Frameworks',
+    category: 'Frameworks & Libraries',
     skills: [
-      { name: 'React.js',       level: 88 },
-      { name: 'Next.js',        level: 85 },
-      { name: 'Node / Express', level: 80 },
-      { name: 'Tailwind CSS',   level: 90 },
-      { name: 'React Native',   level: 70 },
+      { name: 'React.js',     level: 88, icon: `${CDN}/react/react-original.svg` },
+      { name: 'Next.js',      level: 85, icon: `${CDN}/nextjs/nextjs-original.svg` },
+      { name: 'Node.js',      level: 80, icon: `${CDN}/nodejs/nodejs-original.svg` },
+      { name: 'Express.js',   level: 78, icon: `${CDN}/express/express-original.svg` },
+      { name: 'Tailwind CSS', level: 90, icon: `${CDN}/tailwindcss/tailwindcss-original.svg` },
+      { name: 'React Native', level: 70, icon: `${CDN}/react/react-original.svg` },
     ],
   },
   {
     category: 'Tools & Databases',
     skills: [
-      { name: 'MongoDB',    level: 78 },
-      { name: 'Git/GitHub', level: 85 },
-      { name: 'Postman',    level: 75 },
+      { name: 'MongoDB',      level: 78, icon: `${CDN}/mongodb/mongodb-original.svg` },
+      { name: 'Git',          level: 85, icon: `${CDN}/git/git-original.svg` },
+      { name: 'GitHub',       level: 85, icon: `${CDN}/github/github-original.svg` },
+      { name: 'Postman',      level: 75, icon: `${CDN}/postman/postman-original.svg` },
+      { name: 'VS Code',      level: 88, icon: `${CDN}/vscode/vscode-original.svg` },
+      { name: 'Android Studio', level: 70, icon: `${CDN}/androidstudio/androidstudio-original.svg` },
     ],
   },
   {
     category: 'Problem Solving',
     skills: [
-      { name: 'Data Structures', level: 72 },
-      { name: 'Algorithms',      level: 70 },
-      { name: 'LeetCode / GFG',  level: 75 },
+      { name: 'Data Structures', level: 72, icon: `${CDN}/cplusplus/cplusplus-plain.svg` },
+      { name: 'Algorithms',      level: 70, icon: `${CDN}/python/python-original.svg` },
+      { name: 'LeetCode',        level: 75, icon: `${CDN}/javascript/javascript-plain.svg` },
     ],
   },
 ]
@@ -45,28 +53,54 @@ const SOFT = [
   'Learning Agility','Reliability',
 ]
 
-function SkillBar({ name, level, animate }) {
+function SkillRow({ name, level, icon, animate }) {
   return (
-    <div style={{ marginBottom: '1.1rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
+    <div style={{ marginBottom: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
+        {/* Icon + name */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <div style={{
+            width: '22px',
+            height: '22px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <img
+              src={icon}
+              alt={name}
+              width={20}
+              height={20}
+              style={{
+                objectFit: 'contain',
+                filter: 'brightness(0.85) saturate(0.7)',
+                opacity: 0.85,
+              }}
+              onError={e => { e.target.style.display = 'none' }}
+            />
+          </div>
+          <span style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.82rem',
+            color: 'rgba(255,255,255,0.78)',
+            fontWeight: 400,
+            letterSpacing: '0.02em',
+          }}>
+            {name}
+          </span>
+        </div>
+        {/* Percentage */}
         <span style={{
           fontFamily: 'Inter, sans-serif',
-          fontSize: '0.83rem',
-          color: 'rgba(255,255,255,0.75)',
-          fontWeight: 400,
-          letterSpacing: '0.03em',
-        }}>
-          {name}
-        </span>
-        <span style={{
-          fontFamily: 'Inter, sans-serif',
-          fontSize: '0.68rem',
-          color: 'rgba(255,255,255,0.35)',
+          fontSize: '0.67rem',
+          color: 'rgba(255,255,255,0.32)',
           fontWeight: 500,
         }}>
           {level}%
         </span>
       </div>
+      {/* Bar */}
       <div className="skill-track">
         <div className="skill-fill" style={{ width: animate ? `${level}%` : '0%' }} />
       </div>
@@ -81,7 +115,7 @@ export default function Skills() {
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) setAnimate(true) },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     )
     if (ref.current) obs.observe(ref.current)
     return () => obs.disconnect()
@@ -97,20 +131,20 @@ export default function Skills() {
         </h2>
         <div className="chrome-line" style={{ marginBottom: '3.5rem' }} />
 
-        {/* Skill groups */}
+        {/* Skill groups grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: '1.5rem',
           marginBottom: '1.5rem',
         }}>
           {GROUPS.map(g => (
             <div key={g.category} className="glass" style={{ padding: '1.8rem' }}>
-              <p className="chrome-label" style={{ marginBottom: '1.4rem', fontSize: '0.6rem' }}>
+              <p className="chrome-label" style={{ marginBottom: '1.5rem', fontSize: '0.6rem' }}>
                 {g.category}
               </p>
               {g.skills.map(s => (
-                <SkillBar key={s.name} name={s.name} level={s.level} animate={animate} />
+                <SkillRow key={s.name} name={s.name} level={s.level} icon={s.icon} animate={animate} />
               ))}
             </div>
           ))}
