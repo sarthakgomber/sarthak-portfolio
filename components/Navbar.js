@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react'
 
 const LINKS = [
-  { href: '#hero',     label: 'Home' },
-  { href: '#about',    label: 'About' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills',   label: 'Skills' },
-  { href: '#contact',  label: 'Contact' },
+  { href: '#hero',         label: 'Home' },
+  { href: '#about',        label: 'About' },
+  { href: '#projects',     label: 'Projects' },
+  { href: '#skills',       label: 'Skills' },
+  { href: '#certificates', label: 'Certs' },
+  { href: '#contact',      label: 'Contact' },
 ]
 
 export default function Navbar() {
@@ -21,22 +22,21 @@ export default function Navbar() {
 
   return (
     <nav className="navbar" style={{
-      borderBottomColor: scrolled ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.06)',
+      borderBottomColor: scrolled ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,0.08)',
     }}>
       {/* Logo */}
       <a href="#hero" className="nav-logo">SG</a>
 
-      {/* Thin vertical divider */}
-      <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.1)', flexShrink: 0 }} />
+      <div style={{ width: '1px', height: '20px', background: 'rgba(255,255,255,0.12)', flexShrink: 0 }} />
 
       {/* Links */}
-      <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
         {LINKS.map(l => (
           <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
         ))}
       </div>
 
-      {/* Right: CTA */}
+      {/* Resume CTA */}
       <div style={{ marginLeft: 'auto' }}>
         <a
           href="/sarthak-gomber-cv.pdf"
