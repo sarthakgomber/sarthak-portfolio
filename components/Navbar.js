@@ -42,14 +42,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Desktop resume btn */}
-        <div className="nav-desktop" style={{ marginLeft: 'auto' }}>
-          <a href="/sarthak-gomber-cv.pdf" target="_blank" className="chrome-btn"
-            style={{ padding: '0.5rem 1.4rem', fontSize: '0.65rem' }}>
-            Resume
-          </a>
-        </div>
-
         {/* Mobile right side */}
         <div className="nav-mobile" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <a href="/sarthak-gomber-cv.pdf" target="_blank" className="chrome-btn"

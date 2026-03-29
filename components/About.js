@@ -41,14 +41,6 @@ export default function About() {
             <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem', fontWeight: 300, lineHeight: 1.95, color: 'rgba(255,255,255,0.45)', marginBottom: '2rem' }}>
               My stack revolves around React, Next.js, Node.js, and MongoDB. Active DSA problem solver across LeetCode, Coding Ninjas, and GFG. GATE 2026 qualified with a score of 411.
             </p>
-            <p className="chrome-label" style={{ marginBottom: '0.8rem' }}>Certifications</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {certs.map(c => (
-                <div key={c} className="glass-light" style={{ padding: '0.6rem 1rem' }}>
-                  <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)' }}>{c}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
