@@ -89,7 +89,7 @@ export default function Navbar() {
           </button>
 
           {/* Resume — desktop */}
-          <a href="/sarthak-gomber-cv.pdf" target="_blank" className="chrome-btn nav-desktop"
+          <a href="/resume.pdf" target="_blank" className="chrome-btn nav-desktop"
             style={{ padding: '0.4rem 1rem', fontSize: '0.62rem' }}>
             Resume
           </a>
