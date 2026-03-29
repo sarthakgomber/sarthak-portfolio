@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTheme } from './ThemeContext'
 
 const LINKS = [
   { href: '#hero',         label: 'Home' },
@@ -12,8 +13,9 @@ const LINKS = [
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled]   = useState(false)
-  const [menuOpen, setMenuOpen]   = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const { green, toggle }       = useTheme()
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 30)
@@ -21,7 +23,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  // Close menu on link click
   const handleLink = () => setMenuOpen(false)
 
   return (
@@ -42,15 +43,61 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile right side */}
-        <div className="nav-mobile" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/sarthak-gomber-cv.pdf" target="_blank" className="chrome-btn"
+        {/* Right side */}
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+
+          {/* Theme toggle */}
+          <button
+            onClick={toggle}
+            title={green ? 'Switch to Chrome' : 'Switch to Matrix Green'}
+            style={{
+              background: green ? 'rgba(0,255,70,0.08)' : 'rgba(255,255,255,0.07)',
+              border: `1px solid ${green ? 'rgba(0,255,70,0.35)' : 'rgba(255,255,255,0.22)'}`,
+              borderRadius: '2px',
+              padding: '0.42rem 0.8rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              transition: 'all 0.3s ease',
+              backdropFilter: 'blur(8px)',
+              boxShadow: green
+                ? 'inset 0 1px 0 rgba(0,255,70,0.18), 0 0 12px rgba(0,255,70,0.08)'
+                : 'inset 0 1px 0 rgba(255,255,255,0.14)',
+            }}
+          >
+            <span style={{
+              display: 'block',
+              width: '7px',
+              height: '7px',
+              borderRadius: '50%',
+              background: green ? '#00ff46' : 'rgba(255,255,255,0.6)',
+              boxShadow: green ? '0 0 8px #00ff46' : 'none',
+              transition: 'all 0.3s ease',
+            }} />
+            <span style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '0.60rem',
+              fontWeight: 500,
+              letterSpacing: '0.20em',
+              textTransform: 'uppercase',
+              color: green ? 'rgba(0,255,70,0.90)' : 'rgba(255,255,255,0.60)',
+              transition: 'color 0.3s ease',
+            }}>
+              {green ? 'Matrix' : 'Chrome'}
+            </span>
+          </button>
+
+          {/* Resume — desktop */}
+          <a href="/sarthak-gomber-cv.pdf" target="_blank" className="chrome-btn nav-desktop"
             style={{ padding: '0.4rem 1rem', fontSize: '0.62rem' }}>
             Resume
           </a>
-          {/* Hamburger */}
+
+          {/* Hamburger — mobile */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
+            className="nav-mobile"
             style={{
               background: 'none',
               border: '1px solid rgba(255,255,255,0.18)',
@@ -62,7 +109,7 @@ export default function Navbar() {
               gap: '4px',
             }}
           >
-            {[0,1,2].map(i => (
+            {[0, 1, 2].map(i => (
               <span key={i} style={{
                 display: 'block',
                 width: '18px',
@@ -81,12 +128,10 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile dropdown */}
       <div style={{
         position: 'fixed',
-        top: '64px',
-        left: 0,
-        right: 0,
+        top: '64px', left: 0, right: 0,
         zIndex: 999,
         background: 'rgba(6,6,8,0.97)',
         backdropFilter: 'blur(24px)',
@@ -95,12 +140,9 @@ export default function Navbar() {
         maxHeight: menuOpen ? '400px' : '0px',
         transition: 'max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       }}>
-        <div style={{ padding: '1rem 2rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <div style={{ padding: '1rem 2rem 1.5rem', display: 'flex', flexDirection: 'column' }}>
           {LINKS.map((l, i) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={handleLink}
+            <a key={l.href} href={l.href} onClick={handleLink}
               style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '0.9rem',
@@ -119,6 +161,15 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
+          <a href="/sarthak-gomber-cv.pdf" target="_blank"
+            style={{
+              marginTop: '1rem',
+              fontFamily: 'Inter, sans-serif', fontSize: '0.9rem',
+              fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.55)', textDecoration: 'none',
+            }}>
+            Resume
+          </a>
         </div>
       </div>
     </>

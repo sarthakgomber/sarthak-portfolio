@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/components/ThemeContext'
 import StarField from '@/components/StarField'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
@@ -9,17 +10,19 @@ import Contact from '@/components/Contact'
 
 export default function Home() {
   return (
-    <main style={{ position: 'relative', minHeight: '100vh', background: '#060608' }}>
-      <StarField />
-      <Navbar />
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Certificates />
-        <Contact />
-      </div>
-    </main>
+    <ThemeProvider>
+      <main style={{ position: 'relative', minHeight: '100vh', background: '#060608' }}>
+        <StarField />
+        <Navbar />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Certificates />
+          <Contact />
+        </div>
+      </main>
+    </ThemeProvider>
   )
 }
